@@ -1,7 +1,3 @@
-path:
-  root: /home/hong/ws/twc-stable-pushnet/config
-
-
 simulation:
   physics_engine: PHYSX
   num_threads : 16
@@ -114,11 +110,3 @@ simulation:
         x: -1.0 # meters
         z: 1.0 # meters
         r: 30 # deg
-
-
-# python3 data_stats.py
-# python3 data_stats.py
-# ..
-# stable_pushnet
-# python3 dataload_idx.py
-# python3 train.py

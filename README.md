@@ -4,28 +4,49 @@
 ![Python](https://img.shields.io/badge/Python-3.8.10-blue)
 ![Torch](https://img.shields.io/badge/Pytorch-2.1.0-red)
 ![IsaacGym](https://img.shields.io/badge/IsaacGym-Preview4.0-purple)
-# 1. Setup
-## (1) Install ROS
+# Setup
+## Install ROS
 Tested on ros-noetic versions. [ROS Install](http://wiki.ros.org/noetic/Installation/Ubuntu)
 
-## (2) Install Isaac Gym
+## Install Isaac Gym
 Tested on Preview 4 version. [Isaac Gym Install](https://developer.nvidia.com/isaac-gym)
 
-## (3) Setup workspace
-Make catkin workspace and clone git repo.
+## Install Mesh Data
+CAD dish data selected from open dataset.\
+Downloaded folder should be within "**data**" folder.
+[Mesh Install](https://o365skku-my.sharepoint.com/:u:/g/personal/erichong96_o365_skku_edu/EZK1HV0M1mpDnwd2bEymdiMBeunjeT6EaD68aq5RcjkvTw?e=Elv4Y1)
+
+
+```
+catkin_ws
+└── src
+    └── stable-pushnet-datagen
+          ├── config
+          ├── data
+          └── scripts
+              ├── assets
+              └── utils
+
+```
+ 
+## Setup workspace
+Make catkin workspace, clone git repo, and make 
+
 ```bash
+# Make catkin workspace
 mkdir -p ~/catkin_ws/src
-cd catkin_ws
-catkin_make
-cd src
+cd ~/catkin_ws/src
 
-```
-Clone the current git repository
-```bash
+# Clone git repo
 git clone https://github.com/Hongyoungjin/stable-pushnet-datagen.git
+
+# Catkin workspace
+cd ..
+catkin_ws
+cd src
 ```
 
-## (4) Python Dependencies
+## Python Dependencies
 #### Python Packages
 ```bash
 pip install -r requirements.txt
@@ -35,117 +56,79 @@ For safety, install Pytorch with the following command
 ```bash
 pip3 install torch torchvision torchaudio
 ```
-# 2. Usage
-### Set configuration
-You can observe the whole configuration in  [config.yaml](/config.yaml)
+# 2. Make Simulation Assets
 
-Simple description for deploying the module:
-1. To use network-based model, set "planner / learning_base" to True
-2. To change the network threshold, change the "network / network_threshold" value.
+You can also directly download the ready-made asset data from [this link](https://o365skku-my.sharepoint.com/:u:/g/personal/erichong96_o365_skku_edu/EWDsdDwv4btEso9qPhLnTP4BUOpUFKCcOEURE5EICDRaiA?e=oCCUyc).
 
-Detailed description of each configuration element is as follows:
-#### 1. planner
-The overall configuration of the pushing environment.
-
-- gripper_width: 
-  - Width of the parallel-jaw gripper (in meters, default: 0.08)
-  - If you want to apply the different width, you have to retrain the network or use the depth-based model.
-
-- num_push_directions: 
-  - Number of initial push directions (default: 4)
+[Initial Usage]
+1. Open mesh_to_urdf.bash
+2. root_dir="/path/to/dish_mesh_folder"
+3. mesh_exts="(List up all mesh extensions)". 
   
-- learning_base: 
-  - Whether to use the pre-trained network model (default: True)
+### 1. Generate Isaac Gym Assets
+
+Convert dish mesh to dish URDF.
+Isaac Gym requires dish URDF for simulation.
 
 
-- visualize: 
-  - Whether to visualize the push contact (default: False)
-
-
-- height: 
-  - Height of the resultant path (in meters, default: 0.015) 
-  - Since the height of the path may vary depending on the table height, this value may not affect the actual push path.
-
-#### 2. depth_based
-Configuration for the depth-based (analytical & non-trained) model. 
-- friction_coefficient: 
-  - Friction coefficient between the pusher (robot gripper) and the slider (dish)
-  
-#### 3. network
-Configuration for the network model.
-- model_name: 
-  - Name of the network model. The model file is stored in [network_data](./network_data/models/).
-- network_threshold: 
-  - The network threshold to determine whether the given push is considered successful or not.
-
-#### 4. hybrid
-Configuration for the Hybrid-A* Algorithm.
-- grid_size: Grid size of each node (in meters)
-- dtheta: Unit angle difference to make the child nodes (in radians)
-
-### Launch the push-path planning server node
 ```bash
-roslaunch stable_pushnet_ros server.launch
+cd ~/catkin_ws/src/scripts
+source mesh_to_urdf.bash
 ```
-# 3. Tutorial
-The module returns a push path with push success metric through ROS service.
 
-### Services
+### 2. Select Stable Dish Pose
 
-- /stable_push_planner/get_stable_push_path ([stable_push_planner/GetStablePushPath](./srv/GetStablePushPath.srv))
-- Request push target as a result of push-target module
+Among multiple stable poses per dish, select the desired pose. \
+Press **S** to select the pose, **C** to move on, and **E** to exit. \
+Once chosen, all other poses will be deleted.
 
-#### 1. Request
-- dish_segmentation ([vision_msgs/Detection2DArray](http://docs.ros.org/en/noetic/api/vision_msgs/html/msg/Detection2DArray.html))
-  - Dish segmentation result (KIST vision module output)
-- table_detection ([vision_msgs/BoundingBox3D](http://docs.ros.org/en/noetic/api/vision_msgs/html/msg/BoundingBox3D.html))
-  - Table detection result (KIST vision module output)
-- depth_image ([sensor_msgs/Image](http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/Image.html))
-  - Depth image of the entire scene
-- cam_info ([sensor_msgs/CameraInfo](http://docs.ros.org/en/noetic/api/sensor_msgs/html/msg/CameraInfo.html))
-  - Camera info of the depth camera
-- camera_pose ([geometry_msgs/PoseStamped](http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/PoseStamped.html))
-  - Depth camera pose
-- push_targets ([PushTargetArray]([PushTargetArray](./msg/PushTargetArray.msg)))
-  - Array of push targets
-
-#### 2. Response
-
-- path [nav_msgs/Path](http://docs.ros.org/en/noetic/api/nav_msgs/html/msg/Path.html)
-  - Path of the end-effector (center of the fingertips) to push the target
-- plan_successful (`bool`)
-  - True if the plan was successful
-  - False if the plan failed. In this case, the module reutrns a dummy path.
-
-### Custom Messages
-#### 1. PushTargetArray ([PushTargetArray]([PushTargetArray](./msg/PushTargetArray.msg)))
-Array of push targets
-#### 2. PushTarget [PushTarget]([PushTarget](./msg/PushTarget.msg))
-- priority (`int32`)
-  - Priority of the target. Smaller, higher priority
-- push_target_id (`int32`)
-  - ID of the target
-- goal_pose ([geometry_msgs/Pose2D](http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/Pose2D.html))
-  - Goal pose of the target object
-- start_pose_min_theta ([geometry_msgs/Pose2D](http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/Pose2D.html))
-    - Initial contact pose of the target, with the smallest push direction
-- start_pose_max_theta ([geometry_msgs/Pose2D](http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/Pose2D.html))
-    - Initial contact pose of the target, with the largest push direction
-
-### Example
-1. Launch the push-path planning server node
 ```bash
-roslaunch stable_pushnet_ros server.launch
-```
-2. Request the push-path
-```bash
-rosrun stable_pushnet_ros example.py
-```
-3. Observe the resultant push-path
-- We can see in the rViz visalization.
-```bash
-roslaunch stable_pushnet_ros example.launch
+cd ~/catkin_ws/src/scripts
+python3 select_stable_pose.py
 ```
 <div align="center">
-<img src="./example/example_result/result.png" width="500"/>
+<img src="./select_stable_pose.png" width="1000"/>
+(x,y,z) <-> (r,g,b)
 </div>
+
+### 3. Augment Assets
+
+Augment asset data through rescaling in x, y, and z axes.
+
+```bash
+cd ~/catkin_ws/src/scripts
+# num: Number of new assets to be created per each asset.
+python3 augment_asset_data.py --num 10
+```
+
+# Generate Synthetic Dataset
+
+Types of dataset are as follows:
+- Image: Top-view depth image of the dish
+- Masked Image: Masked top-view depth image of the dish
+- Velocity: SE(2) push direction
+- Label: Whether the given push is successful or not (1 and 0)
+
+### 1. Run Simulation 
+
+```bash
+cd ~/catkin_ws/src/scripts
+source datagen_multiprocess.bash
+```
+
+### 2. Augment Train Dataset 
+
+```bash
+cd ~/catkin_ws/src/scripts
+python3 augment_train_data.py
+```
+
+### 3. Analyze Train Data
+
+Derive mean and standard variation values from train data. \
+This is used to regulate the input data when deploying the trained model.
+
+```bash
+cd ~/catkin_ws/src/scripts
+source data_stats.bash
+```

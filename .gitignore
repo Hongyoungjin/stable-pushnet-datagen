@@ -210,9 +210,6 @@ poetry.toml
 venv 
 
 # Not to upload large data
-src/data/
-src/scripts/assets
-
-# This is for real robot operation
-src/src.code-workspace
-src/CMakeLists.txt
+data
+scripts/assets
+CMakeLists.txt
