@@ -1,2 +1,0 @@
-num stable poses: 4
-prob: 0.647, 0.313, 0.021, 0.020
