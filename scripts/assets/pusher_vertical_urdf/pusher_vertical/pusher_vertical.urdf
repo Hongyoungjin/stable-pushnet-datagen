@@ -1,0 +1,130 @@
+<?xml version="1.0" ?>
+<robot name="gripper">
+  <link name="base_link">
+  <inertial>
+      <mass value="0.05" />
+      <inertia ixx="0.000016667" ixy="0" ixz="0" iyy="0.000016667" iyz="0" izz="0.000016667" />
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.0 0.0 0.0"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="link1">
+  <inertial>
+      <mass value="0.05" />
+      <inertia ixx="0.000016667" ixy="0" ixz="0" iyy="0.000016667" iyz="0" izz="0.000016667" />
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.0 0.0 0.0"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="joint1" type="prismatic">
+    <parent link="base_link"/>
+    <child link="link1"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="10" lower="-10" upper="10" velocity="10"/>
+  </joint>
+
+  <link name="link2">
+  <inertial>
+      <mass value="0.05" />
+      <inertia ixx="0.000016667" ixy="0" ixz="0" iyy="0.000016667" iyz="0" izz="0.000016667" />
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.0 0.0 0.0"/>
+      </geometry>
+    </visual>
+    </link>
+
+ <joint name="joint2" type="prismatic">
+ <origin rpy="0 0 0" xyz="0 0 0"/>
+    <parent link="link1"/>
+    <child link="link2"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="10" lower="-10" upper="10" velocity="10"/>
+  </joint>
+
+  <link name="eef">
+  <inertial>
+      <mass value="0.05" />
+      <inertia ixx="0.000016667" ixy="0" ixz="0" iyy="0.000016667" iyz="0" izz="0.000016667" />
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.0 0.0 0.0"/>
+      </geometry>
+    </visual>
+    </link>
+
+ <joint name="joint3" type="revolute">
+    <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.8973" soft_upper_limit="2.8973"/>
+    <parent link="link2"/>
+    <child link="eef"/>
+    <axis xyz="0 0 1"/>
+    <dynamics damping="10.0"/>
+    <limit effort="10" lower="-10" upper="10" velocity="10"/>
+  </joint>
+
+
+
+  <link name="left_finger">
+  <inertial>
+      <mass value="0.05" />
+      <inertia ixx="0.000585417" ixy="0" ixz="0" iyy="0.000092417" iyz="0" izz="0.000573667" />
+    </inertial>
+    <visual>
+    <geometry>
+        <box size="0.008 0.0022 0.2"/>
+    </geometry>
+    </visual>
+    <collision>
+    <geometry>
+        <box size="0.008 0.0022 0.2"/>
+    </geometry>
+    </collision>
+  </link>
+
+  <link name="right_finger">
+  <inertial>
+      <mass value="0.05" />
+      <inertia ixx="0.000585417" ixy="0" ixz="0" iyy="0.000092417" iyz="0" izz="0.000573667" />
+    </inertial>
+    <visual>
+      <geometry>
+          <box size="0.008 0.0022 0.2"/>
+      </geometry>
+    </visual>
+    <collision>
+    <geometry>
+        <box size="0.008 0.0022 0.2"/>
+    </geometry>
+    </collision>
+  </link>
+
+ <joint name="joint4" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.025 0.105"/>
+    <parent link="eef"/>
+    <child link="left_finger"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="20" lower="0.0" upper="0.04" velocity="0.2"/>
+  </joint>
+  
+  <joint name="joint5" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.025 0.105"/>
+    <parent link="eef"/>
+    <child link="right_finger"/>
+    <axis xyz="-1 0 0"/>
+    <dynamics damping="10.0"/>
+    <limit effort="20" lower="0.0" upper="0.04" velocity="0.2"/>
+  </joint>
+</robot>

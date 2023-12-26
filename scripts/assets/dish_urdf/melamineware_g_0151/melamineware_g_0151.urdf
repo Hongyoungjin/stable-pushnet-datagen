@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="melamineware_g_0151">
+  <link name="melamineware_g_0151">
+    <inertial>
+      <mass value="0.05" />
+      <inertia ixx="2.822529821460346e-05" ixy="-3.0768801095379048e-09" ixz="2.707742660858357e-08" iyy="2.8178312449877027e-05" iyz="-2.408518403304824e-09" izz="5.092568848204352e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="/home/hong/ws/stable-pushnet-datagen/src/scripts/assets/dish_urdf/melamineware_g_0151/melamineware_g_0151.stl" scale="1 1 1" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="/home/hong/ws/stable-pushnet-datagen/src/scripts/assets/dish_urdf/melamineware_g_0151/melamineware_g_0151.stl" scale="1 1 1" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

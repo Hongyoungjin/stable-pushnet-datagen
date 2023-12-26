@@ -1,0 +1,124 @@
+path:
+  root: /home/hong/ws/twc-stable-pushnet/config
+
+
+simulation:
+  physics_engine: PHYSX
+  num_threads : 16
+  use_gpu_pipeline : False
+  use_gpu: False
+  compute_device_id: 0
+  graphics_device_id: 0
+  num_envs: 180 #180
+  FILE_ZERO_PADDING_NUM: 7
+  num_iters: 1 #30
+  dt: 0.001
+  render_freq: 1000
+
+  slider_dataset: dish_urdf
+  slider_name: glass
+
+  pusher_dataset: pusher_vertical_urdf
+  pusher_name: pusher_vertical
+
+  slider_rand_position_range: 0.15 # meters 0.05
+  slider_rand_rotation_range: 180 #degrees 180
+  camera_rand_position_range: 0.05 # meters 0.05
+  camera_rand_rotation_range: 10 #degrees 10
+
+  rand_contact_position_range: 0 # meters
+  rand_contact_rotation_range: 0 # degrees
+
+  push_speed: 0.1
+  translational_push_distance: 0.01
+  initial_distance: 0.2 #0.2
+  gripper_width: 0.08
+
+  # Labeling threshold
+  threshold_pos: 0.01 # meters
+  threshold_rot: 15 # degrees
+
+# Friction coefficients
+  pusher_friction_coefficient: 0
+
+  min_friction_coefficient: 0.8
+  max_friction_coefficient: 1.2
+
+  friction_coefficient: 0.5
+
+  camera:
+    ZividTwo:
+      fx: 1783.0662841796875
+      fy: 1782.3050537109375
+      cx: 980
+      cy: 610.2705688476562
+
+      camera_pose:
+        x: -0.67 # meters 
+        z: 0.7 # meters
+        r: 13.5 # deg
+
+    AzureKinect:
+      depth:
+        fx: 305.9728241
+        fy: 305.94388962
+        cx: 320.10463715
+        cy: 244.73226547
+
+      color:
+        fx: 315.139
+        fy: 236.372
+        cx: 326.8280  
+        cy: 245.1210
+
+    IntelRealSenseD455:
+      color:
+        fx: 638.336669921875
+        fy: 636.845703125
+        cx: 630.5924072265625
+        cy: 360.6282958984375
+
+      depth:
+        fx: 425.9282531738281
+        fy: 425.9282531738281
+        cx: 424.21240234375
+        cy: 233.66128540039062
+
+    IntelRealSenseD435:
+      color:
+        fx: 924.0841674804688
+        fy: 924.6384887695312
+        cx: 638.2789306640625
+        cy: 373.99615478515625
+
+      depth:
+        fx: 924.0841674804688
+        fy: 924.6384887695312
+        cx: 638.2789306640625
+        cy: 373.99615478515625
+        
+    IntelRealSenseD415:
+      color:
+        fx: 1396.8086675255472
+        fy: 1406.748094934653
+        cx: 960
+        cy: 540
+
+      depth:
+        fx: 520.3108903739
+        fy: 189.709964
+        cx: 960
+        cy: 540
+
+      camera_pose:
+        x: -1.0 # meters
+        z: 1.0 # meters
+        r: 30 # deg
+
+
+# python3 data_stats.py
+# python3 data_stats.py
+# ..
+# stable_pushnet
+# python3 dataload_idx.py
+# python3 train.py

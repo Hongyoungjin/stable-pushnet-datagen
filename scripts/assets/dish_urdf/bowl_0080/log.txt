@@ -1,0 +1,2 @@
+num stable poses: 3
+prob: 0.999, 0.001, 0.000

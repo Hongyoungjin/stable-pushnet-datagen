@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="2efc35a3625fa50961a9876fa6384765">
+  <link name="2efc35a3625fa50961a9876fa6384765">
+    <inertial>
+      <mass value="0.05" />
+      <inertia ixx="3.2609286530390966e-05" ixy="5.75829394386398e-09" ixz="-3.520888218281391e-09" iyy="3.260454472339843e-05" iyz="-6.781545954765652e-09" izz="5.60899256537773e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="/home/hong/ws/stable-pushnet-datagen/src/scripts/assets/dish_urdf/2efc35a3625fa50961a9876fa6384765/2efc35a3625fa50961a9876fa6384765.obj" scale="1 1 1" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="/home/hong/ws/stable-pushnet-datagen/src/scripts/assets/dish_urdf/2efc35a3625fa50961a9876fa6384765/2efc35a3625fa50961a9876fa6384765.obj" scale="1 1 1" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

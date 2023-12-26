@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="scan_dish_4">
+  <link name="scan_dish_4">
+    <inertial>
+      <mass value="0.05" />
+      <inertia ixx="2.850698394620098e-05" ixy="-5.134975455699252e-09" ixz="7.4084814625150116e-09" iyy="2.8633733593473316e-05" iyz="-5.715321528670687e-08" izz="4.616909017262521e-05" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="/home/hong/ws/stable-pushnet-datagen/src/scripts/assets/dish_urdf/scan_dish_4/scan_dish_4.stl" scale="1 1 1" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="/home/hong/ws/stable-pushnet-datagen/src/scripts/assets/dish_urdf/scan_dish_4/scan_dish_4.stl" scale="1 1 1" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

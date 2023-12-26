@@ -1,0 +1,69 @@
+simulation:
+  physics_engine: PHYSX
+  num_threads : 16
+  use_gpu_pipeline : False
+  use_gpu: False
+  compute_device_id: 0
+  graphics_device_id: 0
+  num_envs: 100
+  FILE_ZERO_PADDING_NUM: 5
+  num_iters: 1
+  dt: 0.01
+  render_freq: 1000
+
+  target_dataset: dish_urdf
+  target_object: rice_bowl
+  
+  gripper_dataset: gripper_urdf
+  gripper_object: gripper
+
+  object_rand_pose_range: 0.05
+  camera_rand_position_range: 0.05
+  camera_rand_rotation_range: 10 #degrees
+  gravity: [0,0,-9.81]
+
+  min_stable_pose_prob: 0.01
+  max_num_stable_pose: 50
+
+
+
+  camera:
+    ZividTwo:
+      fx: 1783.0662841796875
+      fy: 1782.3050537109375
+      cx: 980
+      cy: 610.2705688476562
+
+      camera_pose:
+        z: 70
+        r: 13.5 # deg
+    AzureKinect:
+      depth:
+        fx: 305.9728241
+        fy: 305.94388962
+        cx: 320.10463715
+        cy: 244.73226547
+
+      color:
+        fx: 315.139
+        fy: 236.372
+        cx: 326.8280  
+        cy: 245.1210
+
+    IntelRealSenseD455:
+      color:
+        fx: 638.336669921875
+        fy: 636.845703125
+        cx: 630.5924072265625
+        cy: 360.6282958984375
+
+      depth:
+        fx: 425.9282531738281
+        fy: 425.9282531738281
+        cx: 424.21240234375
+        cy: 233.66128540039062
+
+
+
+
+
