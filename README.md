@@ -56,7 +56,7 @@ For safety, install Pytorch with the following command
 ```bash
 pip3 install torch torchvision torchaudio
 ```
-# 2. Make Simulation Assets
+# Make Simulation Assets
 
 You can also directly download the ready-made asset data from [this link](https://o365skku-my.sharepoint.com/:u:/g/personal/erichong96_o365_skku_edu/EWDsdDwv4btEso9qPhLnTP4BUOpUFKCcOEURE5EICDRaiA?e=oCCUyc).
 
