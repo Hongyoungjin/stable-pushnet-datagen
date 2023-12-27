@@ -102,6 +102,7 @@ python3 augment_asset_data.py --num 10
 ```
 
 # Generate Synthetic Dataset
+You can also directly download the ready-made train data for Zivid Two camera from [this link](https://o365skku-my.sharepoint.com/:f:/g/personal/erichong96_o365_skku_edu/Ep_yOU8n3tdFuOscVSGRsiIBFSIUWLW4r-9aX4GlYpIyVA?e=yPbyLY).
 
 Types of dataset are as follows:
 - Image: Top-view depth image of the dish
