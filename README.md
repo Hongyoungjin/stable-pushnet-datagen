@@ -67,6 +67,7 @@ You can also directly download the ready-made asset data from [this link](https:
 Convert dish mesh to dish URDF.
 Isaac Gym requires dish URDF for simulation.
 
+- Issue: Program may not finish due to long calculation time for stable poses. 
 
 ```bash
 cd ~/catkin_ws/src/scripts
