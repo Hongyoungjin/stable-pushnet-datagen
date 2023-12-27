@@ -1,4 +1,4 @@
-# Stable-PushNet
+# Stable-PushNet-Datagen
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-green)
 ![Python](https://img.shields.io/badge/Python-3.8.10-blue)
 ![Torch](https://img.shields.io/badge/Pytorch-2.1.0-red)
