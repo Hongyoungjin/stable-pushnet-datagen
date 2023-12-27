@@ -1,12 +1,9 @@
 # Stable-PushNet
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-green)
-![ROS](https://img.shields.io/badge/ROS-noetic-yellow)
 ![Python](https://img.shields.io/badge/Python-3.8.10-blue)
 ![Torch](https://img.shields.io/badge/Pytorch-2.1.0-red)
 ![IsaacGym](https://img.shields.io/badge/IsaacGym-Preview4.0-purple)
 # Setup
-## Install ROS
-Tested on ros-noetic versions. [ROS Install](http://wiki.ros.org/noetic/Installation/Ubuntu)
 
 ## Install Isaac Gym
 Tested on Preview 4 version. [Isaac Gym Install](https://developer.nvidia.com/isaac-gym)

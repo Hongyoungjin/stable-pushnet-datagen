@@ -8,7 +8,6 @@ import copy
 import argparse
 
 
-
 '''
 Rescale the mesh in x-y-z direction to augment the slider dataset.
 Randomly extend or shrink the mesh in x-y-z direction.
